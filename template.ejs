@@ -1,0 +1,299 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <head>
+      <meta charset="UTF-8" />
+      <title><%= title %></title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+        }
+  
+        h1,
+        h2 {
+          text-align: center;
+        }
+  
+        table {
+          width: 80%;
+          border-collapse: collapse;
+          margin: 20px 0;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* subtle table shadow */
+        }
+  
+        th,
+        td {
+          border: 1px solid #ddd; /* subtle cell borders */
+          padding: 8px; /* increased padding for better readability */
+          cellspacing: 0; /* remove cell spacing for tighter layout */
+          text-align: left;
+        }
+  
+        .metric-summary {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+  
+        .metric-value {
+          font-size: 18px;
+          font-weight: bold;
+        }
+  
+        .metric-percent {
+          color: #666;
+        }
+  
+        .traffic-light {
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
+  
+        .traffic-light-red {
+          background-color: red;
+        }
+  
+        .traffic-light-yellow {
+          background-color: yellow;
+        }
+  
+        .traffic-light-green {
+          background-color: green;
+        }
+  
+        /* Styling for metrics table */
+        table.metrics {
+          background-color: #f5f5f5; /* light gray background for table */
+        }
+  
+        table.metrics caption {
+          background-color: #e0e0e0; /* darker background for caption */
+          font-weight: bold;
+          padding: 10px; /* increased padding for caption */
+          font-size: 16px; /* larger font size for caption */
+        }
+  
+        table.metrics th,
+        table.metrics td {
+          text-align: left;
+          vertical-align: middle; /* align cell content vertically in the middle */
+        }
+  
+        /* Fix for traffic light cell alignment */
+        .metric-summary {
+          display: flex;
+          align-items: center;
+          justify-content: start; /* align content to the left */
+        }
+  
+        .metric-summary .traffic-light {
+          margin-right: 0; /* remove right margin */
+        }
+      </style>
+ 
+  </head>
+
+  <body>
+    <h1><%= title %></h1>
+    <h2><%= Modulo %></h2>
+    <h2><%= Descripcion %></h2>
+    <p><strong>Filtros Aplicados: <%= filtersApplied %></strong></p>
+    <p><strong>Fecha y Hora: <%= dateTimeString %></strong></p>
+    <table class="metrics"  style="width: 80%">
+      <caption>
+        Métricas
+      </caption>
+      <tr>
+        <th>Items</th>
+        <th>Cantidad</th>
+        <th>%</th>
+        <th>Indicador Semaforo</th>
+      </tr>
+      <tr>
+        <td>Métrica 1: Registros Unificados entre Ambientes</td>
+        <td><%= registrosUnificados.toLocaleString('es-CL')  %></td>
+        <td>100%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Métrica 2: Diferencias entre P7 y P9</td>
+        <td><%= registrosDiferenciaP7P9.toLocaleString('es-CL')  %></td>
+        <td><%= porcentajeDiferenciaP7P9.toFixed(0) %>%</td>
+        <td class="metric-summary">
+          <span
+            class="traffic-light"
+            style="background-color: <%= porcentajeDiferenciaP7P9 > 80 ? 'red' : (porcentajeDiferenciaP7P9 > 30 ? 'yellow' : 'green') %>"
+          ></span>
+          <span class="metric-value"
+            ><%= porcentajeDiferenciaP7P9.toFixed(0) %>%</span
+          >
+          <span class="metric-percent"
+            >(<%= porcentajeDiferenciaP7P9 > 80 ? 'Alto' :
+            (porcentajeDiferenciaP7P9 > 30 ? 'Medio' : 'Bajo') %>)</span
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>Métrica 3: Diferencias entre P7 y PRD</td>
+        <td><%= registrosDiferenciaP7PRD.toLocaleString('es-CL')  %></td>
+        <td><%= porcentajeDiferenciaP7PRD.toFixed(0) %>%</td>
+        <td class="metric-summary">
+          <span
+            class="traffic-light"
+            style="background-color: <%= porcentajeDiferenciaP7PRD > 80 ? 'red' : (porcentajeDiferenciaP7PRD > 30 ? 'yellow' : 'green') %>"
+          ></span>
+          <span class="metric-value"
+            ><%= porcentajeDiferenciaP7PRD.toFixed(0) %>%</span
+          >
+          <span class="metric-percent"
+            >(<%= porcentajeDiferenciaP7PRD > 80 ? 'Alto' :
+            (porcentajeDiferenciaP7PRD > 30 ? 'Medio' : 'Bajo') %>)</span
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>Métrica 4: Diferencias entre P9 y PRD</td>
+        <td><%= registrosDiferenciaPRDP9.toLocaleString('es-CL')  %></td>
+        <td><%= porcentajeDiferenciaPRDP9.toFixed(0) %>%</td>
+        <td class="metric-summary">
+          <span
+            class="traffic-light"
+            style="background-color: <%= porcentajeDiferenciaPRDP9 > 80 ? 'red' : (porcentajeDiferenciaPRDP9 > 30 ? 'yellow' : 'green') %>"
+          ></span>
+          <span class="metric-value"
+            ><%= porcentajeDiferenciaPRDP9.toFixed(0) %>%</span
+          >
+          <span class="metric-percent"
+            >(<%= porcentajeDiferenciaPRDP9 > 80 ? 'Alto' :
+            (porcentajeDiferenciaPRDP9 > 30 ? 'Medio' : 'Bajo') %>)</span
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Métrica Adicional: Registros con diferencias en P7-P9,P7-PRD y P9-PRD
+        </td>
+        <td><%= registrosConCualquierDiferencia.toLocaleString('es-CL')  %></td>
+        <td><%= porcentajeRegistrosConCualquierDiferencia.toFixed(0) %>%</td>
+        <td class="metric-summary">
+          <span
+            class="traffic-light"
+            style="background-color: <%= porcentajeRegistrosConCualquierDiferencia > 80 ? 'red' : (porcentajeRegistrosConCualquierDiferencia > 30 ? 'yellow' : 'green') %>"
+          ></span>
+          <span class="metric-value"
+            ><%= porcentajeRegistrosConCualquierDiferencia.toFixed(0) %>%</span
+          >
+          <span class="metric-percent"
+            >(<%= porcentajeRegistrosConCualquierDiferencia > 80 ? 'Alto' :
+            (porcentajeRegistrosConCualquierDiferencia > 30 ? 'Medio' : 'Bajo')
+            %>)</span
+          >
+        </td>
+      </tr>
+    </table>
+
+    <!-- Aquí puedes agregar más métricas según sea necesario -->
+
+    <table style="width: 100%; border-collapse: collapse">
+      <thead>
+        <tr>
+          <% keys.forEach(key => { %>
+          <th
+            style="
+              padding: 8px;
+              text-align: left;
+              border: 1px solid black;
+              background-color: #e3f6c1;
+            "
+          >
+            <%= key %>
+          </th>
+          <% }) %> <% columns.slice(keys.length).forEach(column => { %>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            <%= column %> P7
+          </th>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            <%= column %> P9
+          </th>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            <%= column %> PRD
+          </th>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            Diferencia P7-P9
+          </th>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            Diferencia P7-PRD
+          </th>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            Diferencia P9-PRD
+          </th>
+          <% }) %>
+          <th style="padding: 8px; text-align: left; border: 1px solid black">
+            Discrepancias
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% rows.forEach(row => { %>
+        <tr
+          style="<%= row.hasDiscrepancy ? 'background-color: #fff0f0;' : '' %>"
+        >
+          <% keys.forEach(key => { %>
+          <td
+            style="
+              padding: 8px;
+              text-align: left;
+              border: 1px solid black;
+              background-color: #f2f2f2;
+            "
+          >
+            <%= row[key] %>
+          </td>
+          <% }) %> <% columns.slice(keys.length).forEach(column => { %>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].P7 === 'No existe' || row.discrepancies[column].differenceP7P9 === 'Diferente' || row.discrepancies[column].differenceP7PRD === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].P7 %>
+          </td>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].P9 === 'No existe' || row.discrepancies[column].differenceP7P9 === 'Diferente' || row.discrepancies[column].differenceP7PRD === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].P9 %>
+          </td>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].PRD === 'No existe' || row.discrepancies[column].differenceP7P9 === 'Diferente' || row.discrepancies[column].differenceP7PRD === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].PRD %>
+          </td>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].differenceP7P9 === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].differenceP7P9 %>
+          </td>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].differenceP7PRD === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].differenceP7PRD %>
+          </td>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.discrepancies[column].differenceP9PRD === 'Diferente' ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.discrepancies[column].differenceP9PRD %>
+          </td>
+          <% }) %>
+          <td
+            style="padding: 8px; text-align: left; border: 1px solid black; <%= row.hasDiscrepancy ? 'background-color: #ffcccc; color: #cc0000;' : 'background-color: #ccffcc;' %>"
+          >
+            <%= row.hasDiscrepancy ? 'Sí' : 'No' %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
